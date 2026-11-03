@@ -1,0 +1,47 @@
+# Render.com deployment blueprint.
+# Docs: https://render.com/docs/blueprint-spec
+# Set OPENAI_API_KEY / ANTHROPIC_API_KEY as Render environment secrets.
+# Use a managed PostgreSQL database (Render Postgres or Supabase) and set the
+# connection string as DATABASE_URL on the backend service.
+
+services:
+  - type: web
+    name: eaip-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    region: oregon
+    plan: starter
+    healthCheckPath: /api/v1/stats/health
+    envVars:
+      - key: ENVIRONMENT
+        value: prod
+      - key: DATABASE_URL
+        sync: false  # set in Render dashboard (managed Postgres connection string)
+      - key: SECRET_KEY
+        sync: false  # set in Render dashboard
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: VECTOR_STORE_TYPE
+        value: chroma
+      - key: EMBEDDING_PROVIDER
+        value: huggingface
+      - key: BACKEND_CORS_ORIGINS
+        value: '[]'  # set to your deployed frontend origin, e.g. ["https://eaip-frontend.onrender.com"]
+      - key: CHROMA_PERSIST_PATH
+        value: /data/chroma_db
+    disk:
+      - name: chroma-data
+        mountPath: /data
+        sizeGB: 5
+
+  - type: web
+    name: eaip-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    region: oregon
+    plan: starter
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false  # set to the backend URL, e.g. https://eaip-backend.onrender.com

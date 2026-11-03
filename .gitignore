@@ -1,0 +1,219 @@
+# =============================================================================
+# Enterprise AI Intelligence Platform — .gitignore
+# =============================================================================
+
+# =============================================================================
+# SECRETS & CREDENTIALS (never commit these)
+# =============================================================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.p12
+*.pfx
+*_credentials.json
+service_account*.json
+google_credentials*.json
+secrets/
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.virtualenv/
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+wheels/
+*.whl
+MANIFEST
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+.hypothesis/
+nosetests.xml
+test-results/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Profiling
+*.prof
+*.lprof
+
+# =============================================================================
+# DATABASES & VECTOR STORES
+# =============================================================================
+
+# SQLite databases (runtime data — not source code)
+*.db
+*.sqlite
+*.sqlite3
+enterprise_ai.db
+test.db
+
+# ChromaDB (embedded vector store — rebuilt from documents on setup)
+chroma_db/
+backend/chroma_db/
+
+# =============================================================================
+# AI / ML ARTIFACTS
+# =============================================================================
+
+# Downloaded model weights (large, fetched at runtime)
+models/
+*.bin
+*.safetensors
+*.gguf
+*.ggml
+*.pt
+*.pth
+*.ckpt
+
+# HuggingFace cache (auto-downloaded)
+.cache/huggingface/
+~/.cache/huggingface/
+
+# Evaluation reports (generated outputs — not source)
+backend/evaluation/evaluation_report.json
+backend/evaluation/eval_results/
+
+# =============================================================================
+# NODE.JS / NEXT.JS
+# =============================================================================
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+.next/
+out/
+build/
+dist/
+
+# Cache
+.next/cache/
+.vercel/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# Package lock (choose one — keep package-lock.json or yarn.lock, not both)
+# yarn.lock
+# pnpm-lock.yaml
+
+# =============================================================================
+# LOGS
+# =============================================================================
+*.log
+*.log.*
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+uvicorn*.log
+app.log
+
+# =============================================================================
+# OS GENERATED
+# =============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# =============================================================================
+# IDE / EDITORS
+# =============================================================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# =============================================================================
+# DOCKER
+# =============================================================================
+# Keep Dockerfiles and docker-compose but ignore runtime volumes
+docker-volumes/
+.docker/
+
+# =============================================================================
+# TEMPORARY & MISC
+# =============================================================================
+tmp/
+temp/
+.temp/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+.cache/
+
+# Test scripts created during debugging (safe to delete)
+backend/test_agent_quick.py
+backend/_debug_gemini.py
+backend/_test_*.py
+backend/_debug_*.py
+
+# Uploaded files (stored at runtime, not in source)
+uploads/
+media/
+
+# Alembic auto-generated (keep migrations, ignore compiled)
+backend/alembic/__pycache__/
+backend/alembic/versions/__pycache__/
